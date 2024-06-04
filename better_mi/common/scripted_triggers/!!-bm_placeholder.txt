@@ -1,0 +1,2 @@
+pd_is_planet_class_machine = { always = no }
+is_materus_sap_installed = { always = no }

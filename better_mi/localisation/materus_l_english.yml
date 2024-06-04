@@ -1,0 +1,16 @@
+﻿l_english:
+  district_machine_science: "Research District"
+  district_machine_science_plural: "Research Districts"
+  district_machine_science_desc: "Districts filled with server arrays and high speed processors making scientific simulations."
+  mod_planet_district_machine_science_build_speed_mult: "$district_machine_science$ Build Speed"
+
+  living_standard_hive_mind_worker: "Drone Simple Worker"
+  living_standard_hive_mind_worker_tooltip: "While it may have little use for luxuries, a drone population still requires a great deal of resources to sustain itself. Will not generate leaders"
+  living_standard_hive_mind_worker_tooltip_delayed: "§LThe needs of the individual and the needs of all are one and the same.§!"
+  living_standard_hive_mind_advanced_worker: "Drone Advanced Worker"
+  living_standard_hive_mind_advanced_worker_tooltip: "While it may have little use for luxuries, a drone population still requires a great deal of resources to sustain itself. Will only generate military leaders."
+  living_standard_hive_mind_advanced_worker_tooltip_delayed: "§LThe needs of the individual and the needs of all are one and the same.§!"
+
+  MACHINE_CANNOT_ENSLAVE_CYBORGS: "$TRIGGER_FAIL$§YCybernetics ascended machine§! cannot enslave cyborg species."
+  council_agenda_agenda_engineered_evolution_machine_name: "$ap_engineered_evolution$"
+  council_agenda_agenda_engineered_evolution_machine_desc: "$ap_engineered_evolution_desc$"

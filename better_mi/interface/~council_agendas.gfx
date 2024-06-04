@@ -1,0 +1,6 @@
+spriteTypes = {
+    spriteType = {
+            name = "GFX_council_agenda_icon_agenda_engineered_evolution_machine"
+            texturefile = "gfx/interface/icons/agenda_icons/agenda_engineered_evolution_machine.dds"
+        }
+}

@@ -1,0 +1,464 @@
+set_origin_effect = {
+	country_event = { id = game_start.8 }
+	give_starting_resources_effect = yes
+	# Necrophages
+	if = {
+		limit = {
+			has_trait = trait_necrophage
+		}
+		set_origin = origin_necrophage
+	}
+	# Subterranean
+	else_if = {
+		limit = {
+			has_trait = trait_cave_dweller
+		}
+		set_origin = origin_subterranean
+	}
+	# Subterranean Machines
+	else_if = {
+		limit = {
+			has_trait = trait_robot_cave_dweller
+		}
+		set_origin = origin_subterranean_machines
+	}
+	# Survivor
+	else_if = {
+		limit = {
+			has_trait = trait_survivor
+		}
+		set_origin = origin_post_apocalyptic
+	}
+	# Survivor Machine
+	else_if = {
+		limit = {
+			has_trait = trait_robot_survivor
+		}
+		set_origin = origin_post_apocalyptic_machines
+	}
+	# Void Dwellers
+	else_if = {
+		limit = {
+			has_trait = trait_void_dweller_1
+		}
+		set_origin = origin_void_dwellers
+	}
+	# Void Machines
+	else_if = {
+		limit = {
+			has_trait = trait_void_dweller_2
+		}
+		set_origin = origin_void_machines
+	}
+	# Calamitous Birth
+	else_if = {
+		limit = {
+			from = { has_origin = origin_lithoid }
+			has_trait = trait_lithoid
+		}
+		set_origin = origin_lithoid
+	}
+	# Liberated
+	else_if = {
+		limit = {
+			has_country_flag = released_empire
+		}
+		set_origin = origin_liberated
+	}
+	else = {
+		set_origin = origin_default
+	}
+
+	# Fix hive/machine
+	if = {
+		limit = {
+            OR = {
+                from = { is_machine_empire = yes }
+                is_machine_empire = yes
+			}
+			NOT = { has_trait = trait_machine_unit }
+		}
+		country_remove_ethic = ethic_gestalt_consciousness
+        shift_ethic = ethic_fanatic_materialist
+        shift_ethic = ethic_xenophile
+		change_government = {
+			authority = random
+			civics = random
+			cooldown = no
+			remove_invalid_civics = yes
+		}
+	}
+	else_if = {
+		limit = {
+			is_hive_empire = yes
+			NOT = { has_trait = trait_hive_mind }
+		}
+		country_remove_ethic = ethic_gestalt_consciousness
+		shift_ethic = ethic_xenophile
+        change_government = random
+	}
+	#Assimilators
+	else_if = {
+		limit = {
+			is_machine_empire = no
+			from = {
+				is_machine_empire = yes
+				has_valid_civic = civic_machine_assimilator
+			}
+			has_trait = trait_machine_unit
+		}
+		shift_ethic = ethic_gestalt_consciousness
+		change_government = {
+			authority = auth_machine_intelligence
+			civics = {
+				civic = civic_machine_assimilator
+				civic = random
+			}
+			cooldown = no
+			remove_invalid_civics = yes
+		}
+	}
+	#Servitor
+	else_if = {
+		limit = {
+			is_machine_empire = no
+			from = {
+				is_machine_empire = yes
+				has_valid_civic = civic_machine_servitor
+			}
+			has_trait = trait_machine_unit
+		}
+		shift_ethic = ethic_gestalt_consciousness
+		change_government = {
+			authority = auth_machine_intelligence
+			civics = {
+				civic = civic_machine_servitor
+				civic = random
+			}
+			cooldown = no
+			remove_invalid_civics = yes
+		}
+	}
+	#Generic machine
+	else_if = {
+		limit = {
+			is_machine_empire = no
+			from = {
+				is_machine_empire = yes
+			}
+			has_trait = trait_machine_unit
+		}
+		shift_ethic = ethic_gestalt_consciousness
+		change_government = {
+			authority = auth_machine_intelligence
+			civics = random
+			cooldown = no
+			remove_invalid_civics = yes
+		}
+	}
+	else_if = {
+		limit = {
+			is_hive_empire = no
+			has_trait = trait_hive_mind
+		}
+		shift_ethic = ethic_gestalt_consciousness
+		change_government = {
+			authority = auth_hive_mind
+			cooldown = no
+			remove_invalid_civics = yes
+		}
+	}
+	country_event = { id = game_start.70 }
+	country_event = { id = game_start.72 }
+}
+
+
+apply_post_assimilation_effects = {
+	if = { # assimilator empire
+		limit = {
+			root.owner = {
+				has_authority = auth_machine_intelligence
+				OR = { 
+					has_civic = civic_machine_assimilator
+					has_ascension_perk = ap_organo_machine_interfacing_assimilator
+				}
+			}
+		}
+		root.owner = { generate_cyborg_treats = yes } # scripted effect
+	}
+	if = {
+		limit = {
+			NOT = {
+				owner = {
+					any_owned_pop = {
+						is_exact_same_species = event_target:convert_to_species
+						NOT = { is_same_value = prevprev }
+					}
+				}
+			}
+		}
+		if = { # set citizenship
+			limit = { root.owner = { has_authority = auth_machine_intelligence } }
+			set_citizenship_type = {
+				type = citizenship_full_machine
+				country = root.owner
+			}
+		}
+		else = {
+			set_citizenship_type = {
+				type = citizenship_full
+				country = root.owner
+			}
+		}
+
+		if = { # set citizenship
+			limit = { root.owner = { has_ethic = ethic_gestalt_consciousness } }
+			set_living_standard = {
+				type = living_standard_hive_mind
+				country = root.owner
+			}
+		}
+	}
+
+	if = { # Handle assimilation of spiritualists into cybernetic empires
+		limit = {
+			root.owner = { has_policy_flag = cyberization_standards_limited }
+			is_spiritualist = yes
+			has_trait = trait_cybernetic
+		}
+		convert_to_limited_cybernetic_effect = {
+			CYBER_SPECIES = event_target:convert_to_species
+		}
+	}
+}
+
+
+give_society_tech_tier_1_effect = {
+	if = {
+		limit = {
+			is_regular_empire = yes
+		}
+		give_technology = { tech = tech_space_trading }
+	}
+	give_technology = { tech = tech_eco_simulation }
+	give_technology = { tech = tech_hydroponics }
+	give_technology = { tech = tech_food_processing_1 }
+	if = {
+		limit = {
+			is_regular_empire = yes
+		}
+		give_technology = { tech = tech_alien_life_studies }
+	}
+	if = {
+		limit = {
+			is_regular_empire = yes
+		}
+		give_technology = { tech = tech_frontier_health }
+	}
+	give_technology = { tech = tech_dense_jungle }
+	give_technology = { tech = tech_quicksand_basin }
+	give_technology = { tech = tech_noxious_swamp }
+	give_technology = { tech = tech_massive_glacier }
+	give_technology = { tech = tech_toxic_kelp }
+	give_technology = { tech = tech_deep_sinkhole }
+	if = {
+		limit = {
+			OR = {
+				NOT = { has_authority = auth_machine_intelligence }
+				OR = { 
+					has_civic = civic_machine_assimilator
+					has_ascension_perk = ap_organo_machine_interfacing_assimilator
+				}
+				has_civic = civic_machine_servitor
+			}
+		}
+		give_technology = { tech = tech_genome_mapping }
+	}
+	give_technology = { tech = tech_ground_defense_planning }
+	give_technology = { tech = tech_planetary_unification }
+	give_technology = { tech = tech_adaptive_bureaucracy }
+	if = {
+		limit = {
+			is_regular_empire = yes
+		}
+		give_technology = { tech = tech_neural_implants }
+	}
+	if = {
+		limit = {
+			is_gestalt = no
+		}
+		give_technology = { tech = tech_hyper_entertainment_forum }
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_ethic = ethic_spiritualist
+				has_ethic = ethic_fanatic_spiritualist
+				has_valid_civic = civic_machine_servitor
+			}
+		}
+		give_technology = { tech = tech_heritage_site }
+	}
+}
+
+give_society_tech_tier_2_effect = {
+	give_technology = { tech = tech_gene_crops }
+	give_technology = { tech = tech_arcane_deciphering }
+	if = {
+		limit = {
+			OR = {
+				is_machine_empire = no
+				OR = { 
+					has_civic = civic_machine_assimilator
+					has_ascension_perk = ap_organo_machine_interfacing_assimilator
+				}
+				has_civic = civic_machine_servitor
+			}
+		}
+		give_technology = { tech = tech_colonization_2 }
+	}
+	if = {
+		limit = {
+			OR = {
+				is_machine_empire = no
+				OR = { 
+					has_civic = civic_machine_assimilator
+					has_ascension_perk = ap_organo_machine_interfacing_assimilator
+				}
+				has_civic = civic_machine_servitor
+			}
+		}
+		give_technology = { tech = tech_colonization_3 }
+	}
+	if = {
+		limit = {
+			is_gestalt = no
+		}
+		give_technology = { tech = tech_frontier_hospital }
+	}
+	give_technology = { tech = tech_mountain_range }
+	give_technology = { tech = tech_volcano }
+	give_technology = { tech = tech_dangerous_wildlife }
+	give_technology = { tech = tech_terrestrial_sculpting }
+	if = {
+		limit = {
+			OR = {
+				NOT = { has_authority = auth_machine_intelligence }
+				OR = { 
+					has_civic = civic_machine_assimilator
+					has_ascension_perk = ap_organo_machine_interfacing_assimilator
+				}
+			}
+		}
+		give_technology = { tech = tech_vitality_boosters }
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_valid_civic = civic_fanatic_purifiers
+				#has_valid_civic = civic_machine_terminator # covered by not being machine
+				#has_valid_civic = civic_hive_devouring_swarm # can uplift to make delicious
+			}
+			OR = {
+				NOT = { has_authority = auth_machine_intelligence }
+				OR = { 
+					has_civic = civic_machine_assimilator
+					has_ascension_perk = ap_organo_machine_interfacing_assimilator
+				}
+				has_civic = civic_machine_servitor
+			}
+		}
+		give_technology = { tech = tech_epigenetic_triggers }
+	}
+	if = {
+		limit = {
+			OR = {
+				NOT = { has_authority = auth_machine_intelligence }
+				OR = { 
+					has_civic = civic_machine_assimilator
+					has_ascension_perk = ap_organo_machine_interfacing_assimilator
+				}
+			}
+		}
+		give_technology = { tech = tech_cloning }
+	}
+	if = {
+		limit = {
+			OR = {
+				NOT = { has_authority = auth_machine_intelligence }
+				OR = { 
+					has_civic = civic_machine_assimilator
+					has_ascension_perk = ap_organo_machine_interfacing_assimilator
+				}
+			}
+		}
+		give_technology = { tech = tech_gene_banks }
+	}
+	give_technology = { tech = tech_doctrine_fleet_size_1 }
+	give_technology = { tech = tech_doctrine_fleet_size_2 }
+	give_technology = { tech = tech_interstellar_fleet_traditions }
+	give_technology = { tech = tech_doctrine_navy_size_1 }
+	give_technology = { tech = tech_centralized_command }
+	give_technology = { tech = tech_global_defense_grid }
+	give_technology = { tech = tech_galactic_ambitions }
+	give_technology = { tech = tech_interstellar_campaigns }
+	give_technology = { tech = tech_colonial_centralization }
+	give_technology = { tech = tech_planetary_infrastructure_1 }
+	if = {
+		limit = {
+			NOT = { has_ethic = ethic_gestalt_consciousness	}
+		}
+		give_technology = { tech = tech_subdermal_stimulation }
+	}
+	give_technology = { tech = tech_effective_bureaucracy }
+	give_technology = { tech = tech_colonial_bureaucracy }
+	if = {
+		limit = {
+			NOT = { has_ethic = ethic_gestalt_consciousness }
+		}
+		give_technology = { tech = tech_living_state }
+	}
+	if = {
+		limit = {
+			has_ethic = ethic_gestalt_consciousness
+		}
+		give_technology = { tech = tech_autonomous_agents }
+	}
+	if = {
+		limit = {
+			NOT = { has_ethic = ethic_gestalt_consciousness }
+		}
+		give_technology = { tech = tech_artificial_moral_codes }
+	}
+	if = {
+		limit = {
+			is_gestalt = yes
+		}
+		give_technology = { tech = tech_unity_of_purpose }
+	}
+	if = {
+		limit = {
+			has_ethic = ethic_gestalt_consciousness
+		}
+		give_technology = { tech = tech_holographic_rituals }
+	}
+	if = {
+		limit = {
+			is_hive_empire = yes
+		}
+		give_technology = { tech = tech_hive_cluster }
+	}
+	if = {
+		limit = {
+			is_gestalt = no
+		}
+		give_technology = { tech = tech_slave_colonies }
+	}
+	if = {
+		limit = {
+			is_regular_empire = yes
+		}
+		give_technology = { tech = tech_xeno_diplomacy }
+	}
+	give_technology = { tech = tech_capital_productivity_1 }
+}

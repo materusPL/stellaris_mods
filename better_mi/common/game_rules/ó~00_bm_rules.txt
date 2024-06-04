@@ -1,0 +1,47 @@
+can_generate_leader_from_pop = {
+	can_be_leader = yes
+	NOT = { has_living_standard = { type = living_standard_hive_mind_worker country = owner } }
+	NOT = { has_living_standard = { type = living_standard_hive_mind_advanced_worker country = owner } }
+}
+can_generate_military_leader_from_pop = {
+	can_be_leader = yes
+	can_be_military_leader = yes
+	NOT = { has_living_standard = { type = living_standard_hive_mind_worker country = owner } }
+}
+
+can_release_vassal = {
+	custom_tooltip = {
+		fail_text = default
+		NOT = { has_valid_civic = civic_fanatic_purifiers }
+	}
+	custom_tooltip = {
+		fail_text = default
+		NOT = { has_valid_civic = civic_machine_terminator }
+	}
+	custom_tooltip = {
+		fail_text = default
+		NOT = { has_valid_civic = civic_hive_devouring_swarm }
+	}
+}
+
+#Root = species
+#This = country
+can_release_vassal_from_species = {
+	root = {
+		is_sapient = yes
+		NOR = {
+			AND = {
+				has_trait = trait_hive_mind
+				NOT = { prev.this = { has_origin = origin_progenitor_hive } }
+			}
+			AND = {
+				NOT = { has_trait = trait_hive_mind }
+				prev.this = { has_authority = auth_hive_mind }
+			}
+			has_trait = trait_mechanical
+			can_think = no
+			has_trait = trait_clone_soldier_infertile
+			has_trait = trait_clone_soldier_infertile_full_potential
+		}
+	}
+}
