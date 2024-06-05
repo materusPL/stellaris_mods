@@ -1,3 +1,4 @@
 ﻿l_english:
  tr_genetics_finish_extra_traits_modifier_desc: "Unlocks usage of §Yovertuned§! traits.\nAllows research of rare §YTransgenesis§! technologies.\n$mod_planet_buildings_clone_vats_upkeep_mult$: §G-33%§!\n$TRADITIONS_FINISH_AP$"
-
+ council_agenda_agenda_engineered_evolution_machine_name: "$ap_engineered_evolution$"
+ council_agenda_agenda_engineered_evolution_machine_desc: "$ap_engineered_evolution_desc$"
