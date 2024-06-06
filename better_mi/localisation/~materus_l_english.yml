@@ -12,3 +12,6 @@
   living_standard_hive_mind_advanced_worker_tooltip_delayed: "§LThe needs of the individual and the needs of all are one and the same.§!"
 
   MACHINE_CANNOT_ENSLAVE_CYBORGS: "$TRIGGER_FAIL$§YCybernetics ascended machine§! cannot enslave cyborg species."
+
+  trait_pc_materus_machine_preference: "$trait_pc_machine_preference$"
+  trait_pc_materus_machine_preference_desc: "$trait_pc_machine_preference_desc$"

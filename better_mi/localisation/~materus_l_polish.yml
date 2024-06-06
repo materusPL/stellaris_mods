@@ -12,3 +12,6 @@
   living_standard_hive_mind_advanced_worker_tooltip_delayed: "§LNie ma różnicy między potrzebami jednostki a potrzebami roju.§!"
 
   MACHINE_CANNOT_ENSLAVE_CYBORGS: "$TRIGGER_FAIL$Nie można zniewolić cyborgów"
+
+  trait_pc_materus_machine_preference: "$trait_pc_machine_preference$"
+  trait_pc_materus_machine_preference_desc: "$trait_pc_machine_preference_desc$"

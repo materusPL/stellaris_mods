@@ -1,0 +1,40 @@
+trait_pc_materus_machine_preference = {
+	icon = "gfx/interface/icons/traits/trait_pc_machine_preference.dds"
+
+	bound_to_planet_classes = {
+		pc_machine
+		pc_pd_machine_cave
+		pc_pd_machine_superhabitable
+		pc_pd_machine_tidally_locked
+		pc_giga_planetary_computer
+	}
+
+	species_potential_add = {
+		AND = { 
+            from = { 
+                has_tradition = tr_cybernetics_assimilator_finish 
+                has_ascension_perk = ap_machine_worlds
+                }
+            can_add_cybernetic_traits = yes
+        }
+	}
+	species_possible_merge_add = {
+		always = yes
+	}
+    species_possible_remove = {
+        can_remove_cybernetic_traits = yes
+    }
+
+	allowed_archetypes = { BIOLOGICAL PRESAPIENT LITHOID }
+	sorting_priority = 30
+	modifier = {
+		pc_machine_habitability = 1.0
+		pc_pd_machine_cave_habitability = 1.0
+		pc_pd_machine_superhabitable_habitability = 1.0
+		pc_pd_machine_tidally_locked_habitability = 1.0
+        pc_giga_planetary_computer_habitability = 1.0
+	}
+	ai_weight = {
+		weight = 0
+	}
+}
