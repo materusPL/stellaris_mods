@@ -1,0 +1,46 @@
+namespace = bm
+event = {
+	id = bm.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		has_lithoids = yes
+		any_playable_country = {
+			has_valid_civic = civic_bm_void_machines
+		}
+	}
+
+	immediate = {
+		every_playable_country = {
+			limit = {
+				has_valid_civic = civic_bm_void_machines
+				NOT = { has_country_flag = void_tactical_machine_cooldown }
+			}
+			random_system_within_border = {
+				limit = {
+					any_system_planet = {
+						NOT = {
+							has_planet_flag = has_megastructure
+						}
+						OR = {
+							AND = {
+								has_deposit_for = shipclass_mining_station
+								has_mining_station = no
+							}
+							AND = {
+								has_deposit_for = shipclass_research_station
+								has_research_station = no
+							}
+						}
+					}
+				}
+				system_event = { id = action.725 }
+			}
+			set_timed_country_flag = {
+				flag = void_tactical_machine_cooldown
+				days = 95
+			}
+		}
+	}
+}

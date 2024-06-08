@@ -15,3 +15,6 @@
 
   trait_pc_materus_machine_preference: "$trait_pc_machine_preference$"
   trait_pc_materus_machine_preference_desc: "$trait_pc_machine_preference_desc$"
+
+  civic_bm_void_machines: "Void Machines"
+  civic_bm_void_machines_desc: "This Machine Intelligence has made space yet another of its domains. Specially manufactured drones are capable of spending entire life cycles without ever entering a world's atmosphere."

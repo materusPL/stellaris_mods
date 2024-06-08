@@ -15,3 +15,7 @@
 
   trait_pc_materus_machine_preference: "$trait_pc_machine_preference$"
   trait_pc_materus_machine_preference_desc: "$trait_pc_machine_preference_desc$"
+
+  civic_bm_void_machines: "Maszyny pustki"
+  civic_bm_void_machines_desc: "Ta mechaniczna inteligencja uczyniła próżnię jednym ze swoich królestw. Specjalnie zaprojektowane drony potrafią spędzić cały cykl życiowy bez wlatywania w jakąkolwiek atmosferę."
+ 
