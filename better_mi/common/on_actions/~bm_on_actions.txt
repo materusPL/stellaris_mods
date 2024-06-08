@@ -3,3 +3,13 @@ on_monthly_pulse_country = {
 		bm.1
 	}
 }
+on_tech_increased = {
+	events = {
+		bm.2
+	}
+}
+on_post_government_changed = {
+	events = {
+		bm.3
+	}
+}

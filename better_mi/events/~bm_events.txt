@@ -44,3 +44,175 @@ event = {
 		}
 	}
 }
+
+
+country_event = {
+	id = bm.2
+	is_triggered_only = yes
+	hide_window = yes
+
+	trigger = {
+		has_valid_civic = civic_bm_void_machines
+		OR = {
+			last_increased_tech = tech_mine_exotic_gases
+			last_increased_tech = tech_mine_rare_crystals
+			last_increased_tech = tech_mine_volatile_motes
+			last_increased_tech = tech_mine_zro
+			last_increased_tech = tech_mine_dark_matter
+			last_increased_tech = tech_mine_living_metal
+		}
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				last_increased_tech = tech_mine_exotic_gases
+			}
+			remove_modifier = reduce_gas_output
+		}
+		if = {
+			limit = {
+				last_increased_tech = tech_mine_rare_crystals
+			}
+			remove_modifier = reduce_crystal_output
+		}
+		if = {
+			limit = {
+				last_increased_tech = tech_mine_volatile_motes
+			}
+			remove_modifier = reduce_motes_output
+		}
+		if = {
+			limit = {
+				last_increased_tech = tech_mine_zro
+			}
+			remove_modifier = reduce_zro_output
+		}
+		if = {
+			limit = {
+				last_increased_tech = tech_mine_dark_matter
+			}
+			remove_modifier = reduce_dark_matter_output
+		}
+		if = {
+			limit = {
+				last_increased_tech = tech_mine_living_metal
+			}
+			remove_modifier = reduce_living_metal_output
+		}
+	}
+}
+
+country_event = {
+	id = bm.3
+	is_triggered_only = yes
+	hide_window = yes
+	trigger = {
+		NOT = {
+			has_valid_civic = civic_bm_void_machines
+		}
+		OR = {
+			has_modifier = reduce_gas_output
+			has_modifier = reduce_crystal_output
+			has_modifier = reduce_motes_output
+			has_modifier = reduce_zro_output
+			has_modifier = reduce_dark_matter_output
+			has_modifier = reduce_living_metal_output
+		}
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				has_modifier = reduce_gas_output
+			}
+			every_planet_within_border = {
+				limit = {
+					has_mining_station = yes
+					has_resource = { type = exotic_gases amount > 0 }
+				}
+				mining_station = {
+					dismantle = yes
+				}
+			}
+			remove_modifier = reduce_gas_output
+		}
+		if = {
+			limit = {
+				has_modifier = reduce_crystal_output
+			}
+			every_planet_within_border = {
+				limit = {
+					has_mining_station = yes
+					has_resource = { type = rare_crystals amount > 0 }
+				}
+				mining_station = {
+					dismantle = yes
+				}
+			}
+			remove_modifier = reduce_crystal_output
+		}
+		if = {
+			limit = {
+				has_modifier = reduce_motes_output
+			}
+			every_planet_within_border = {
+				limit = {
+					has_mining_station = yes
+					has_resource = { type = volatile_motes amount > 0 }
+				}
+				mining_station = {
+					dismantle = yes
+				}
+			}
+			remove_modifier = reduce_motes_output
+		}
+		if = {
+			limit = {
+				has_modifier = reduce_zro_output
+			}
+			every_planet_within_border = {
+				limit = {
+					has_mining_station = yes
+					has_resource = { type = sr_zro amount > 0 }
+				}
+				mining_station = {
+					dismantle = yes
+				}
+			}
+			remove_modifier = reduce_zro_output
+		}
+		if = {
+			limit = {
+				has_modifier = reduce_dark_matter_output
+			}
+			every_planet_within_border = {
+				limit = {
+					has_mining_station = yes
+					has_resource = { type = sr_dark_matter amount > 0 }
+				}
+				mining_station = {
+					dismantle = yes
+				}
+			}
+			remove_modifier = reduce_dark_matter_output
+		}
+		if = {
+			limit = {
+				has_modifier = reduce_living_metal_output
+			}
+			every_planet_within_border = {
+				limit = {
+					has_mining_station = yes
+					has_resource = { type = sr_living_metal amount > 0 }
+				}
+				mining_station = {
+					dismantle = yes
+				}
+			}
+			remove_modifier = reduce_living_metal_output
+		}
+	}
+}
+
+
